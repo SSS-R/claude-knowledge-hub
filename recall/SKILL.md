@@ -8,8 +8,11 @@ argument-hint: "[init | sync | status | add <path> | <topic>]"
 
 The hub lives at `~/.claude/knowledge/` (override with the `KNOWLEDGE_HUB` env var).
 Routing table: `INDEX.json`. Root node: `ROOT.md`. Project cards: `projects/<id>.md`.
-Optional: `decisions/<topic>.md` for cross-project decisions, `profile/` for long-form
-detail that does not fit in ROOT.
+History and sync log: `STATUS.md`. Optional: `decisions/<topic>.md` for cross-project
+decisions, `profile/` for long-form detail that does not fit in ROOT.
+
+ROOT loads in every session, so every line in it is paid for every time. It holds only what
+changes how Claude behaves. History, sync logs and one-off findings go in `STATUS.md`.
 
 `hub.py` and `templates/` sit next to this file — use the base directory shown when this
 skill loaded. Run it with `python3` (`python` on Windows). It is stdlib-only and offline.
@@ -64,15 +67,16 @@ not loaded. If the hub does not exist, say so and offer `/recall init`.
 3. For each project in the verdict, read only its `sessions/filtered/<id>.md` and update
    `projects/<id>.md` with what is genuinely new — decisions, reversals, constraints,
    current state. Keep what still holds; do not rewrite a card wholesale to paraphrase it.
-4. Set `distilled_on` in the card and in `INDEX.json`, and update the Status section of
-   `ROOT.md`. If a repeated preference surfaced, add it to ROOT's standing preferences.
+4. Set `distilled_on` in the card and in `INDEX.json`, and add a dated entry to
+   `STATUS.md` (create it if missing). Touch `ROOT.md` only if something that changes
+   behaviour moved — a project's one-line summary, a new standing preference.
 5. Report what changed in a few lines. If a card's claim now contradicts the repo, verify
    against the repo and say which won.
 
 ## `status` — report, change nothing
 
 Projects tracked, when each was last distilled, session and turn counts, and when the last
-sync ran. Read `INDEX.json` and `sessions/.last_run.json` only.
+sync ran. Read `INDEX.json`, `sessions/.last_run.json` and `STATUS.md` only.
 
 ## `add <path>` — track a new project
 
@@ -87,8 +91,8 @@ that other project's transcripts.
 
 ## anything else — search the whole hub
 
-Treat it as a topic. Grep `ROOT.md`, `profile/`, `projects/`, `decisions/` and
-`sessions/filtered/` for it and answer from what you find, citing which card or project
+Treat it as a topic. Grep `ROOT.md`, `STATUS.md`, `profile/`, `projects/`, `decisions/`
+and `sessions/filtered/` for it and answer from what you find, citing which card or project
 each fact came from. This is the cross-project path — "what did I decide about licensing",
 "where did I use Postgres", "which projects hit rate limits". If the answer needs an exact
 exchange or date the cards do not hold, grep the raw transcripts under

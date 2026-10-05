@@ -9,7 +9,7 @@ then has Claude distill that into **small per-project cards** that load only whe
 working in that project.
 
 On the author's machine: **327 MB of transcripts across 24 sessions → 470 KB of real
-signal (0.15%)** → about a dozen cards. `ROOT.md` costs about 2.5k tokens per session; a
+signal (0.15%)** → about a dozen cards. `ROOT.md` costs about 1.7k tokens per session; a
 project card adds 1–2k more when you are working in that project.
 
 ## How it works
@@ -18,6 +18,7 @@ project card adds 1–2k more when you are working in that project.
 ~/.claude/knowledge/
 ├── ROOT.md              who you are, standing preferences, environment, project list   ← every session
 ├── INDEX.json           routing table: project path → card
+├── STATUS.md            sync log and hub history                                      ← on demand
 ├── projects/<id>.md     one card per project                                          ← only when cwd matches
 ├── decisions/<topic>.md cross-project decisions (optional)                            ← on demand
 └── sessions/filtered/   filtered transcripts                                          ← searched, never loaded

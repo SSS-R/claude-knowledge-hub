@@ -1,7 +1,10 @@
 # ROOT — knowledge hub
 
 The root node. Claude reads this at session start; everything else is pulled on demand.
-Keep it under ~200 lines. Routing table: `INDEX.json`. Refresh with `/recall sync`.
+Routing table: `INDEX.json`. History and sync status: `STATUS.md` (read on demand).
+
+Every line here is paid for in every session. Keep only what changes how Claude behaves;
+history, sync logs and one-off findings go in `STATUS.md` or a project card.
 
 <!-- /recall init fills every section below. Replace the placeholders; delete what you don't use. -->
 
@@ -42,20 +45,3 @@ Each has a card in `projects/<id>.md`. Load **only** the one matching the curren
 
 <!-- Decisions that span projects live in `decisions/<topic>.md`. List each with one line
      on when to read it. Never loaded at session start. -->
-
----
-
-## How to use this hub
-
-| Tier | What | When |
-|---|---|---|
-| 0 | The binding in `~/.claude/CLAUDE.md` | always |
-| 1 | This file | session start |
-| 2 | One project card | only when cwd matches a path in `INDEX.json` |
-| 3 | `sessions/filtered/`, raw transcripts | searched with `/recall <topic>`, never loaded wholesale |
-
-Cards are lossy by design. For an exact exchange or date, search the raw transcripts.
-
-## Status
-
-<!-- What has been distilled and when. /recall sync updates this. -->
