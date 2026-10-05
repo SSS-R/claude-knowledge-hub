@@ -1,0 +1,16 @@
+{
+  "_comment": "Routing table for the knowledge hub. Claude reads ROOT.md first, then matches the current directory against projects[].path to decide which card to load. 'transcripts' is the folder name under ~/.claude/projects/ (see: hub.py --discover); null when a project has none.",
+  "schema": 1,
+  "projects": [],
+  "_example_project": {
+    "id": "my-app",
+    "name": "My App",
+    "path": "/home/you/code/my-app",
+    "card": "projects/my-app.md",
+    "repo": "https://github.com/you/my-app",
+    "transcripts": "-home-you-code-my-app",
+    "status": "active",
+    "distilled_on": "2026-01-31"
+  },
+  "decisions": {}
+}
