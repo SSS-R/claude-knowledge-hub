@@ -9,7 +9,8 @@ then has Claude distill that into **small per-project cards** that load only whe
 working in that project.
 
 On the author's machine: **327 MB of transcripts across 24 sessions → 470 KB of real
-signal (0.15%)** → about a dozen cards. Session-start cost is roughly 2k tokens.
+signal (0.15%)** → about a dozen cards. `ROOT.md` costs about 2.5k tokens per session; a
+project card adds 1–2k more when you are working in that project.
 
 ## How it works
 
